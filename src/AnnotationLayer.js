@@ -128,7 +128,6 @@ export default class AnnotationLayer extends EventEmitter {
 
     g.setAttribute('class', 'a9s-annotation');
     g.setAttribute('data-id', annotation.id);
-    console.log(g.querySelector('.a9s-outer'), annotation)
     if (annotation.underlying.outerColor) g.querySelector('.a9s-outer').setAttribute('stroke', annotation.underlying.outerColor)
 
     g.annotation = annotation;
