@@ -23,7 +23,7 @@ export default class AnnotationLayer extends EventEmitter {
 
     this.disableSelect = false;
 
-    const { naturalWidth, naturalHeight } = this.imageEl;
+    const { clientWidth, clientHeight } = this.imageEl;
 
     // Annotation layer SVG element
     this.svg = document.createElementNS(SVG_NAMESPACE, 'svg');
@@ -43,11 +43,11 @@ export default class AnnotationLayer extends EventEmitter {
       this.svg.setAttribute('class', 'a9s-annotationlayer');
     }
 
-    if (naturalWidth == 0 && naturalHeight == 0) {
+    if (clientWidth == 0 && clientHeight == 0) {
       this.imageEl.onload = () =>
-        this.svg.setAttribute('viewBox', `0 0 ${this.imageEl.naturalWidth} ${this.imageEl.naturalHeight}`);
+        this.svg.setAttribute('viewBox', `0 0 ${this.imageEl.clientWidth} ${this.imageEl.clientHeight}`);
     } else {
-      this.svg.setAttribute('viewBox', `0 0 ${naturalWidth} ${naturalHeight}`);
+      this.svg.setAttribute('viewBox', `0 0 ${clientWidth} ${clientHeight}`);
     }
 
     // Don't attach directly, but in group
@@ -57,7 +57,7 @@ export default class AnnotationLayer extends EventEmitter {
     wrapperEl.appendChild(this.svg);
 
     if (config.crosshair) {
-      this.crosshair = new Crosshair(this.g, naturalWidth, naturalHeight);
+      this.crosshair = new Crosshair(this.g, clientWidth, clientHeight);
       addClass(this.svg, 'has-crosshair');
     }
 
