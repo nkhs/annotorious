@@ -20,6 +20,7 @@ export default class AnnotationLayer extends EventEmitter {
 
     this.readOnly = config.readOnly;
     this.formatter = config.formatter;
+    this.outerColor = config.outerColor;
 
     this.disableSelect = false;
 
@@ -129,6 +130,7 @@ export default class AnnotationLayer extends EventEmitter {
     g.setAttribute('class', 'a9s-annotation');
     g.setAttribute('data-id', annotation.id);
     if (annotation.underlying.outerColor) g.querySelector('.a9s-outer').setAttribute('stroke', annotation.underlying.outerColor)
+    else if(this.outerColor) g.querySelector('.a9s-outer').setAttribute('stroke', this.outerColor)
 
     g.annotation = annotation;
 
